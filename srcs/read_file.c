@@ -29,6 +29,33 @@ ret_type init_read(char *file_name) {
     return (OK);
 }
 
+ret_type remove_space(char **line) {
+    char *new_line;
+    int   len;
+    int   i;
+
+    i = 0;
+    len = 0;
+    while ((*line)[i] != '\0' && (*line)[i] != '#') {
+        if ((*line)[i] != ' ' && (*line)[i] != '\t') {
+            len++;
+        }
+        i++;
+    }
+    new_line = malloc(sizeof(char) * (len+1));
+    i = 0;
+    len = 0;
+    while ((*line)[i] != '\0' && (*line)[i] != '#') {
+        if ((*line)[i] != ' ' && (*line)[i] != '\t') {
+            new_line[len++] = (*line)[i];
+        }
+        i++;
+    }
+    new_line[len] = '\0';
+    free(*line);
+    *line = new_line;
+    return (OK);
+}
 
 ret_type return_line(char **line) {
     char    *old_buffer;
@@ -56,6 +83,7 @@ ret_type return_line(char **line) {
     strcpy(*line, old_buffer);
 
     free(old_buffer);
+    remove_space(line);
     return (OK);
 }
 

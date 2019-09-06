@@ -1,7 +1,8 @@
 NAME = exsys
 
 SRC_PATH = 	srcs/
-SRC_NAME =	main.c
+SRC_NAME =	main.c           process_file.c \
+			read_file.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

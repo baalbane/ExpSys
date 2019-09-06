@@ -34,6 +34,8 @@ ret_type    process_line(char *line, operand_list *operands, fact_list *facts) {
     char                *left;
     bool                 double_implie;
 
+    printf("\nnew line: %s\n\n", line);
+
     if (is_double_implies(line, &double_implie) == CRITICAL_ERROR) {
         printf("ERROR SYNTAXE IN LINE \"%s\"", line);
         return (CRITICAL_ERROR);
@@ -55,8 +57,7 @@ ret_type process_file(char *file_name, operand_list *operands, fact_list *facts)
         return (CRITICAL_ERROR);
     }
     while (get_new_line(&new_line) == OK) {
-        printf("\nnew line: %s\n\n", new_line);
-        if (process_line(new_line, operands, facts) == CRITICAL_ERROR) {
+        if (new_line[0] != '\0' && process_line(new_line, operands, facts) == CRITICAL_ERROR) {
             free(new_line);
             return (CRITICAL_ERROR);
         }
