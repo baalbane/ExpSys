@@ -34,8 +34,6 @@ ret_type    process_line(char *line, operand_list *operands, fact_list *facts) {
     char                *left;
     bool                 double_implie;
 
-    printf("\nnew line: %s\n\n", line);
-
     if (is_double_implies(line, &double_implie) == CRITICAL_ERROR) {
         printf("ERROR SYNTAXE IN LINE \"%s\"", line);
         return (CRITICAL_ERROR);
@@ -44,6 +42,8 @@ ret_type    process_line(char *line, operand_list *operands, fact_list *facts) {
         printf("CRITICAL ERROR IN LINE \"%s\"", line);
         return (CRITICAL_ERROR);
     }
+    left = rpn_get(left);
+    right = rpn_get(right);
     printf("double implie: %d\n", double_implie);
     printf("left : \"%s\"\n", left);
     printf("right: \"%s\"\n", right);

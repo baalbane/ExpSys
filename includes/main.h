@@ -26,7 +26,7 @@ typedef struct  t_nodes
 
 #include "operand.h"
 #include "fact.h"
-
+#include "rpn_parsing.h"
 
 ret_type process_file(char*, operand_list *, fact_list*);
 ret_type cleanup_read();
