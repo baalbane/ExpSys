@@ -1,40 +1,12 @@
 
 #include "main.h"
 
-
-ret_type    is_double_implies(char *line, bool *double_implies) {
-    char *ptr;
-
-    ptr = strchr(line, '=');
-    if (!ptr || ptr == line || *(ptr+1) != '>') {
-        return (CRITICAL_ERROR);
-    }
-    *double_implies = FALSE;
-    if (*(ptr-1) == '<') {
-        *double_implies = TRUE;
-    }
-    return (OK);
-}
-
-ret_type    split_rule(char *line, char **left, char **right) {
-    char *ptr;
-
-    *left = line;
-    line = strchr(line, '=');
-    *right = line+2;
-    if (*(line-1) == '<') {
-        line--;
-    }
-    *line = '\0';
-    return (OK);
-}
-
 ret_type    process_line(char *line, operand_list *operands, fact_list *facts) {
     char                *right;
     char                *left;
     bool                 double_implie;
 
-    if (is_double_implies(line, &double_implie) == CRITICAL_ERROR) {
+    if (has_valid_implication(line, &double_implie) == CRITICAL_ERROR) {
         printf("ERROR SYNTAXE IN LINE \"%s\"", line);
         return (CRITICAL_ERROR);
     }

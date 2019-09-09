@@ -32,7 +32,8 @@ ret_type process_file(char*, operand_list *, fact_list*);
 ret_type cleanup_read();
 ret_type init_read(char*);
 ret_type get_new_line(char**);
-
+ret_type has_valid_implication(char *line, bool *has_double_implication);
+ret_type split_rule(char *line, char **left, char **right);
 
 
 
