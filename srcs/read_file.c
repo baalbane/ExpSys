@@ -1,7 +1,6 @@
 
 #include "main.h"
 
-#define READ_BUFF_SIZE     32
 
 static FILE *file   = NULL;
 static char *buffer = NULL;
@@ -29,7 +28,7 @@ ret_type init_read(char *file_name) {
     return (OK);
 }
 
-ret_type remove_space(char **line) {
+static ret_type remove_space(char **line) {
     char *new_line;
     int   len;
     int   i;
@@ -57,7 +56,7 @@ ret_type remove_space(char **line) {
     return (OK);
 }
 
-ret_type return_line(char **line) {
+static ret_type return_line(char **line) {
     char    *old_buffer;
     char    *ptr;
     
@@ -87,7 +86,7 @@ ret_type return_line(char **line) {
     return (OK);
 }
 
-ret_type read_buffer() {
+static ret_type read_buffer() {
     char   *new_buffer;
     int     read_size;
     char    read_buffer[READ_BUFF_SIZE+1];

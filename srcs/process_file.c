@@ -2,62 +2,61 @@
 #include "main.h"
 
 
-ret_type    is_double_implies(char *line, bool *double_implies) {
-    char *ptr;
+static ret_type set_initial_value(graph *graph, char *line) {
+    int    i;
+    fact  *tmp;
 
-    ptr = strchr(line, '=');
-    if (!ptr || ptr == line || *(ptr+1) != '>') {
-        return (CRITICAL_ERROR);
-    }
-    *double_implies = FALSE;
-    if (*(ptr-1) == '<') {
-        *double_implies = TRUE;
+    i = 0;
+    while (line[++i]) {
+        tmp = get_fact(graph, line[i]);
+        if (!tmp) {
+            printf("ERROR: Unknown fact: '%c'\n", line[i]);
+            return (ERROR);
+        }
+        tmp->set_value = 1;
     }
     return (OK);
 }
 
-ret_type    split_rule(char *line, char **left, char **right) {
-    char *ptr;
+static ret_type print_result(graph *graph, char *line) {
+    int    i;
+    fact  *tmp;
 
-    *left = line;
-    line = strchr(line, '=');
-    *right = line+2;
-    if (*(line-1) == '<') {
-        line--;
+    i = 0;
+    while (line[++i]) {
+        tmp = get_fact(graph, line[i]);
+        if (!tmp) {
+            printf("ERROR: Unknown fact: '%c'\n", line[i]);
+            return (ERROR);
+        }
+        printf("%c = %d\n", tmp->name, tmp->set_value);
     }
-    *line = '\0';
     return (OK);
 }
 
-ret_type    process_line(char *line, operand_list *operands, fact_list *facts) {
-    char                *right;
-    char                *left;
-    bool                 double_implie;
 
-    if (is_double_implies(line, &double_implie) == CRITICAL_ERROR) {
-        printf("ERROR SYNTAXE IN LINE \"%s\"", line);
-        return (CRITICAL_ERROR);
+static ret_type process_line(char *line, graph *graph) {
+    if (line[0] == '?') {
+        compute_graph_state(graph);
+        print_result(graph, line);
+        return (OK);
+    } else if (line[0] == '=') {
+        if (set_initial_value(graph, line) != OK) {
+            return (ERROR);
+        }
+        return (OK);
     }
-    if (split_rule(line, &left, &right) == CRITICAL_ERROR) {
-        printf("CRITICAL ERROR IN LINE \"%s\"", line);
-        return (CRITICAL_ERROR);
-    }
-    left = rpn_get(left);
-    right = rpn_get(right);
-    printf("double implie: %d\n", double_implie);
-    printf("left : \"%s\"\n", left);
-    printf("right: \"%s\"\n", right);
-    return (OK);
+    return (process_implication(line, graph));
 }
 
-ret_type process_file(char *file_name, operand_list *operands, fact_list *facts) {
+ret_type process_file(char *file_name, graph *graph) {
     char    *new_line;
 
     if (init_read(file_name) != OK) {
         return (CRITICAL_ERROR);
     }
     while (get_new_line(&new_line) == OK) {
-        if (new_line[0] != '\0' && process_line(new_line, operands, facts) == CRITICAL_ERROR) {
+        if (new_line[0] != '\0' && process_line(new_line, graph) == CRITICAL_ERROR) {
             free(new_line);
             return (CRITICAL_ERROR);
         }
