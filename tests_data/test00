@@ -1,5 +1,5 @@
-#test rpn
 
-A | B + C => A | (B + C)
-(A | B) + C => (B + C) | A
-
+A+B<=>C
+!D=>C
+=
+?ABCD
