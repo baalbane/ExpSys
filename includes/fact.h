@@ -5,12 +5,15 @@ struct operand;
 
 typedef struct  t_fact
 {
-    char        node_type;
+    NODE_TYPE   node_type;
     char        name;
 
-    operand    *affects_value_of;
     char        initial_value;
     char        set_value;
 }               fact, **fact_list;
 
+
+fact    *fact_new(graph*, char);
+ret_type init_fact_list(graph*);
+fact    *get_fact(graph*, char);
 #endif
