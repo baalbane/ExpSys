@@ -20,7 +20,7 @@ typedef struct  t_operand
 }               operand, **operand_list;
 
 
-operand *operand_new(graph*, Stack*, char);
-ret_type init_operand_list(graph*);
+operand *operand_new(t_graph*, Stack*, char);
+ret_type init_operand_list(t_graph*);
 
 #endif

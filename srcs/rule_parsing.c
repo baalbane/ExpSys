@@ -27,7 +27,7 @@ static ret_type split_rule(char *line, char **left, char **right) {
 }
 
 
-static nodes    *create_expression_from_rpn(graph *graph, char *rpn_string) {
+static nodes    *create_expression_from_rpn(t_graph *graph, char *rpn_string) {
     nodes *tmp = NULL;
     Stack   *stack = NULL;
     int i;
@@ -46,7 +46,7 @@ static nodes    *create_expression_from_rpn(graph *graph, char *rpn_string) {
     return (tmp);
 }
 
-ret_type process_implication(char *line, graph *graph) {
+ret_type process_implication(char *line, t_graph *graph) {
     char                *right;
     char                *left;
     bool                 has_double_implication;

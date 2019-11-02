@@ -2,9 +2,9 @@
 #include "main.h"
 
 
-static ret_type set_initial_value(graph *graph, char *line) {
+static ret_type set_initial_value(t_graph *graph, char *line) {
     int    i;
-    fact  *tmp;
+    t_fact  *tmp;
 
     i = 0;
     while (line[++i]) {
@@ -18,9 +18,9 @@ static ret_type set_initial_value(graph *graph, char *line) {
     return (OK);
 }
 
-static ret_type print_result(graph *graph, char *line) {
+static ret_type print_result(t_graph *graph, char *line) {
     int    i;
-    fact  *tmp;
+    t_fact  *tmp;
 
     i = 0;
     while (line[++i]) {
@@ -35,7 +35,7 @@ static ret_type print_result(graph *graph, char *line) {
 }
 
 
-static ret_type process_line(char *line, graph *graph) {
+static ret_type process_line(char *line, t_graph *graph) {
     if (line[0] == '?') {
         compute_graph_state(graph);
         print_result(graph, line);
@@ -49,7 +49,7 @@ static ret_type process_line(char *line, graph *graph) {
     return (process_implication(line, graph));
 }
 
-ret_type process_file(char *file_name, graph *graph) {
+ret_type process_file(char *file_name, t_graph *graph) {
     char    *new_line;
 
     if (init_read(file_name) != OK) {

@@ -13,11 +13,11 @@
 #ifndef GRAPH_H
 # define GRAPH_H
 
-struct fact;
+struct t_fact;
 struct operand;
 
 typedef struct				s_graph {
-	struct fact				**facts;
+	struct t_fact			**facts;
 	int						fact_list_size;
 	struct operand			**operands;
 	int						operand_list_size;

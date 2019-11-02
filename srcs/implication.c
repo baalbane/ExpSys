@@ -2,7 +2,7 @@
 #include "main.h"
 
 
-implication *implication_new(graph *graph) {
+implication *implication_new(t_graph *graph) {
     implication *new;
 
     new = malloc(sizeof(implication));
@@ -11,7 +11,7 @@ implication *implication_new(graph *graph) {
     return (new);
 }
 
-ret_type init_implication_list(graph *graph) {
+ret_type init_implication_list(t_graph *graph) {
     graph->implication_list_size = LIST_DEFAULT_SIZE;
     graph->implications = malloc(sizeof(implication*) * graph->implication_list_size);
     graph->implications[0] = NULL;

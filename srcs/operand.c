@@ -2,7 +2,7 @@
 #include "main.h"
 
 
-operand *operand_new(graph *graph, Stack *stack, char operand_type) {
+operand *operand_new(t_graph *graph, Stack *stack, char operand_type) {
     operand *new;
 
     new = malloc(sizeof(operand));
@@ -22,7 +22,7 @@ operand *operand_new(graph *graph, Stack *stack, char operand_type) {
     return (new);
 }
 
-ret_type init_operand_list(graph *graph) {
+ret_type init_operand_list(t_graph *graph) {
     graph->operand_list_size = LIST_DEFAULT_SIZE;
     graph->operands = malloc(sizeof(operand*) * graph->operand_list_size);
     graph->operands[0] = NULL;

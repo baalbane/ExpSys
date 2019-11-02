@@ -42,9 +42,9 @@ typedef struct  t_nodes
 #include "operand.h"
 #include "fact.h"
 
-ret_type process_file(char*, graph*);
-ret_type compute_graph_state(graph*);
-ret_type process_implication(char*, graph*);
+ret_type process_file(char*, t_graph*);
+ret_type compute_graph_state(t_graph*);
+ret_type process_implication(char*, t_graph*);
 
 
 

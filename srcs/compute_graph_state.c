@@ -26,7 +26,7 @@ static int   evalute_node(nodes *node) {
         return (0);
     }
     if (node->node_type == NODE_TYPE_FACT) {
-        return (((fact *)node)->set_value);
+        return (((t_fact *)node)->set_value);
     }
     operand_node = (operand *)node;
     right_value = evalute_node(operand_node->right);
@@ -34,7 +34,7 @@ static int   evalute_node(nodes *node) {
     return (evaluate_expression(left_value, right_value, operand_node->operand_type));
 }
 
-static int				set_fact_value(fact *fact, int value) {
+static int				set_fact_value(t_fact *fact, int value) {
 	if (fact->set_value && value == 0) {
 		printf("Error : Conflicting rules\n");
 		exit(0);
@@ -53,7 +53,7 @@ static int             infer_node(nodes *node, int value) {
         return (0);
     }
     if (node->node_type == NODE_TYPE_FACT) {
-		return (set_fact_value((fact *)node, value));
+		return (set_fact_value((t_fact *)node, value));
     }
     operand_node = (operand *)node;
     if (operand_node->operand_type == OPERAND_TYPE_AND) {
@@ -74,7 +74,7 @@ static int   evalute_implication(implication *implication) {
     return (0);
 }
 
-ret_type compute_graph_state(graph *graph) {
+ret_type compute_graph_state(t_graph *graph) {
     int i;
     int state_has_changed = 0;
 

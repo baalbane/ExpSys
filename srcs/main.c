@@ -6,7 +6,7 @@
 int main(int argc, char **argv) {
 
     char            *file_name = argv[1];
-    graph           *graph;
+    t_graph           *graph;
 
     if (argc != 2) {
         printf("ERROR: need input file\n");
