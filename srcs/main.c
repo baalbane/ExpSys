@@ -8,9 +8,8 @@ int main(int argc, char **argv) {
     char            *file_name = argv[1];
     graph           *graph;
 
-    printf("%lf | %lf\n", sizeof(char), sizeof(void*));
     if (argc != 2) {
-        printf("ERROR: need file in input\n");
+        printf("ERROR: need input file\n");
         return (-1);
     }
     graph = new_graph();
