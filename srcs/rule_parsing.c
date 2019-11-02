@@ -16,8 +16,6 @@ static ret_type has_valid_implication(char *line, bool *has_double_implication) 
 }
 
 static ret_type split_rule(char *line, char **left, char **right) {
-    char *ptr;
-
     *left = line;
     line = strchr(line, '=');
     *right = line+2;

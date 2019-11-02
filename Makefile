@@ -14,7 +14,7 @@ INC_PATH = 	includes/
 
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -O0 -ggdb
+CFLAGS = -O0 -ggdb -Wall -Werror -Wextra
 RM = rm -f
 
 

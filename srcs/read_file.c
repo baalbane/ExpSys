@@ -28,20 +28,27 @@ ret_type init_read(char *file_name) {
     return (OK);
 }
 
+static int		count_non_whitespace(char *line) {
+	int   count;
+    int   i;
+
+    i = 0;
+    count = 0;
+    while (line[i] != '\0' && line[i] != '#') {
+        if (line[i] != ' ' && line[i] != '\t') {
+            count++;
+        }
+        i++;
+    }
+	return (count);
+}
+
 static ret_type remove_space(char **line) {
     char *new_line;
     int   len;
     int   i;
 
-    i = 0;
-    len = 0;
-    while ((*line)[i] != '\0' && (*line)[i] != '#') {
-        if ((*line)[i] != ' ' && (*line)[i] != '\t') {
-            len++;
-        }
-        i++;
-    }
-    new_line = malloc(sizeof(char) * (len+1));
+    new_line = malloc(sizeof(char) * (count_non_whitespace(*line)+1));
     i = 0;
     len = 0;
     while ((*line)[i] != '\0' && (*line)[i] != '#') {

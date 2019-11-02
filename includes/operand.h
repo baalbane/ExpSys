@@ -13,7 +13,7 @@ enum OPERAND_TYPES {
 
 typedef struct  t_operand
 {
-    NODE_TYPE   node_type;
+    char	   node_type;
     char        operand_type;
     nodes      *right;
     nodes      *left;

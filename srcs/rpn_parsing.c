@@ -58,7 +58,6 @@ static ret_type rpn_cleanup(rpn_data *to_del) {
 char *rpn_get(char *line) {
     rpn_data  *data;
     int        i;
-    char       a;
 
     rpn_init(&data, line);
 	i = -1;
@@ -67,21 +66,21 @@ char *rpn_get(char *line) {
             data->rpn[++(data->rpn_pt)] = line[i];
 		}
 		else if (line[i] == '(') {
-			stack_push(data->stack, (void*)line[i]);
+			stack_push(data->stack, ((void**)line)[i]);
 		}
 		else if (line[i] == ')') {
 			pop_parent(data);
 		}
 		else if (strchr(OPERANDS, line[i]) != NULL) {
 			if (stack_is_empty(data->stack) == TRUE) {
-				stack_push(data->stack, (void*)line[i]);
+				stack_push(data->stack, ((void**)line)[i]);
 			}
             else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_LOWER) {
-				stack_push(data->stack, (void*)line[i]);
+				stack_push(data->stack, ((void**)line)[i]);
 			}
             else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_EQUAL) {
                 data->rpn[++(data->rpn_pt)] = (char)stack_pop(data->stack);
-				stack_push(data->stack, (void*)line[i]);
+				stack_push(data->stack, ((void**)line)[i]);
 			}
 			else {
                 data->rpn[++(data->rpn_pt)] = (char)stack_pop(data->stack);

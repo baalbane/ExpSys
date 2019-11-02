@@ -23,15 +23,14 @@ typedef enum {
         OK
 } ret_type;
 
-typedef enum {
-        NODE_TYPE_FACT,
-        NODE_TYPE_OPERAND,
-        NODE_TYPE_IMPLICATION
-} NODE_TYPE;
+#define NODE_TYPE_FACT 1
+#define NODE_TYPE_OPERAND 2
+#define NODE_TYPE_IMPLICATION 3
+
 
 typedef struct  t_nodes
 {
-    NODE_TYPE   node_type;
+    char	   node_type;
 }               nodes, **node_list;
 
 
