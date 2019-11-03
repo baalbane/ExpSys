@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-static ret_type has_valid_implication(char *line, bool *has_double_implication) {
+static int has_valid_implication(char *line, char *has_double_implication) {
     char *ptr;
 
     ptr = strchr(line, '=');
@@ -15,7 +15,7 @@ static ret_type has_valid_implication(char *line, bool *has_double_implication) 
     return (OK);
 }
 
-static ret_type split_rule(char *line, char **left, char **right) {
+static int split_rule(char *line, char **left, char **right) {
     *left = line;
     line = strchr(line, '=');
     *right = line+2;
@@ -27,9 +27,9 @@ static ret_type split_rule(char *line, char **left, char **right) {
 }
 
 
-static nodes    *create_expression_from_rpn(t_graph *graph, char *rpn_string) {
-    nodes *tmp = NULL;
-    Stack   *stack = NULL;
+static t_node    *create_expression_from_rpn(t_graph *graph, char *rpn_string) {
+    t_node *tmp = NULL;
+    t_stack   *stack = NULL;
     int i;
 
     stack_new(&stack);
@@ -41,15 +41,15 @@ static nodes    *create_expression_from_rpn(t_graph *graph, char *rpn_string) {
             operand_new(graph, stack, rpn_string[i]);
         }
     }
-    tmp = (nodes*)stack_pop(stack);
+    tmp = (t_node*)stack_pop(stack);
     stack_delete(stack);
     return (tmp);
 }
 
-ret_type process_implication(char *line, t_graph *graph) {
+int process_implication(char *line, t_graph *graph) {
     char                *right;
     char                *left;
-    bool                 has_double_implication;
+    char                 has_double_implication;
 
 
 
@@ -69,7 +69,7 @@ ret_type process_implication(char *line, t_graph *graph) {
     printf("right: \"%s\"\n", right);
 
 
-    implication *new_implication;
+    t_implication *new_implication;
 
     new_implication = implication_new(graph);
     new_implication->left = create_expression_from_rpn(graph, left);

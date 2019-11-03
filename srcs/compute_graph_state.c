@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compute_graph_state.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/03 16:02:19 by egaborea          #+#    #+#             */
+/*   Updated: 2019/11/03 16:26:51 by egaborea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "main.h"
 
@@ -17,8 +28,8 @@ int			evaluate_expression(int left_value, int right_value, char operand) {
 	return (-1);
 }
 
-static int   evalute_node(nodes *node) {
-    operand *operand_node;
+static int   evalute_node(t_node *node) {
+    t_operand *operand_node;
     int      right_value;
     int      left_value;
     
@@ -28,7 +39,7 @@ static int   evalute_node(nodes *node) {
     if (node->node_type == NODE_TYPE_FACT) {
         return (((t_fact *)node)->set_value);
     }
-    operand_node = (operand *)node;
+    operand_node = (t_operand *)node;
     right_value = evalute_node(operand_node->right);
     left_value = evalute_node(operand_node->left);
     return (evaluate_expression(left_value, right_value, operand_node->operand_type));
@@ -46,8 +57,8 @@ static int				set_fact_value(t_fact *fact, int value) {
 	return (1);
 }
 
-static int             infer_node(nodes *node, int value) {
-    operand *operand_node;
+static int             infer_node(t_node *node, int value) {
+    t_operand *operand_node;
     
     if (!node) {
         return (0);
@@ -55,7 +66,7 @@ static int             infer_node(nodes *node, int value) {
     if (node->node_type == NODE_TYPE_FACT) {
 		return (set_fact_value((t_fact *)node, value));
     }
-    operand_node = (operand *)node;
+    operand_node = (t_operand *)node;
     if (operand_node->operand_type == OPERAND_TYPE_AND) {
         int left_result = infer_node(operand_node->left, value);
         int right_result = infer_node(operand_node->right, value);
@@ -67,14 +78,14 @@ static int             infer_node(nodes *node, int value) {
     return (0);
 }
 
-static int   evalute_implication(implication *implication) {
+static int   evalute_implication(t_implication *implication) {
     if (evalute_node(implication->left)) {
         return (infer_node(implication->right, 1));
     }
     return (0);
 }
 
-ret_type compute_graph_state(t_graph *graph) {
+int compute_graph_state(t_graph *graph) {
     int i;
     int state_has_changed = 0;
 

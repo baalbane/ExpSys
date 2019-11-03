@@ -6,7 +6,7 @@
 /*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 17:06:15 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/02 18:26:14 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/03 16:27:17 by egaborea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ t_graph			*new_graph(void)
 	return (new);
 }
 
-node_list		*get_node_list(t_graph *graph, char type)
+t_node_list		*get_node_list(t_graph *graph, char type)
 {
 	if (type == NODE_TYPE_FACT) {
-		return ((node_list*)&(graph->facts));
+		return ((t_node_list*)&(graph->facts));
 	}
 	else if (type == NODE_TYPE_OPERAND)
-		return ((node_list*)&(graph->operands));
-	return ((node_list*)&(graph->implications));
+		return ((t_node_list*)&(graph->operands));
+	return ((t_node_list*)&(graph->implications));
 }
 
 int				*get_node_list_size(t_graph *graph, char type)
@@ -44,9 +44,9 @@ int				*get_node_list_size(t_graph *graph, char type)
 	return (&(graph->implication_list_size));
 }
 
-ret_type		add_new_node(t_graph *graph, nodes *to_add)
+int		add_new_node(t_graph *graph, t_node *to_add)
 {
-	node_list	*list_ptr;
+	t_node_list	*list_ptr;
 	int   		*size;
 	int			i;
 	

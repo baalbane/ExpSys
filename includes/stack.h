@@ -1,28 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/02 17:03:00 by egaborea          #+#    #+#             */
+/*   Updated: 2019/11/03 16:39:15 by egaborea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef STACK_H_
-# define STACK_H_
+#ifndef STACK_H
+# define STACK_H
 
+# define STACK_BUFF_SIZE 1
 
-# define   STACK_BUFF_SIZE    1
+typedef struct			s_stack_node {
+	void				*buffer[STACK_BUFF_SIZE];
+	int					buffer_pt;
+	struct s_stack_node	*next;
+}						t_stack_node;
 
+typedef struct			s_stack {
+	t_stack_node		*first;
+	t_stack_node		*last;
+}						t_stack;
 
-typedef struct           t_Stack_node {
-    void                *buffer[STACK_BUFF_SIZE];
-    int                  buffer_pt;
-    struct t_Stack_node *next;
-}                        Stack_node;
+int						stack_new(t_stack **stack_ptr);
+int						stack_delete(t_stack *to_del);
+void					*stack_pop(t_stack *stack);
+int						stack_push(t_stack *stack, void *x);
+char					stack_is_empty(t_stack *stack);
+void					*stack_get_last(t_stack *stack);
 
-
-typedef struct           t_Stack {
-    Stack_node          *first;
-    Stack_node          *last;
-}                        Stack;
-
-
-ret_type stack_new(Stack**);
-ret_type stack_delete(Stack*);
-void    *stack_pop(Stack*);
-ret_type stack_push(Stack*, void*);
-bool     stack_is_empty(Stack*);
-void    *stack_get_last(Stack*);
 #endif

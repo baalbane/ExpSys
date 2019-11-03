@@ -3,10 +3,10 @@
 
 
 
-static ret_type stack_new_node(Stack_node **node_ptr) {
-    Stack_node *new;
+static int stack_new_node(t_stack_node **node_ptr) {
+    t_stack_node *new;
 
-     if ((new = malloc(sizeof(Stack_node))) == NULL) {
+     if ((new = malloc(sizeof(t_stack_node))) == NULL) {
         printf("MALLOC ERROR\n");
         return (CRITICAL_ERROR);
     }
@@ -18,10 +18,10 @@ static ret_type stack_new_node(Stack_node **node_ptr) {
 
 
 
-ret_type stack_new(Stack **stack_ptr) {
-    Stack *new;
+int stack_new(t_stack **stack_ptr) {
+    t_stack *new;
 
-    if ((new = malloc(sizeof(Stack))) == NULL) {
+    if ((new = malloc(sizeof(t_stack))) == NULL) {
         printf("MALLOC ERROR\n");
         return (CRITICAL_ERROR);
     }
@@ -33,7 +33,7 @@ ret_type stack_new(Stack **stack_ptr) {
     return (OK);
 }
 
-static ret_type stack_delete_node(Stack_node *to_del) {
+static int stack_delete_node(t_stack_node *to_del) {
     if (to_del->next) {
         stack_delete_node(to_del->next);
     }
@@ -41,14 +41,14 @@ static ret_type stack_delete_node(Stack_node *to_del) {
     return (OK);
 }
 
-ret_type stack_delete(Stack *to_del) {
+int stack_delete(t_stack *to_del) {
     stack_delete_node(to_del->first);
     free(to_del);
     return (OK);
 }
 
-static ret_type stack_delete_last_node(Stack *stack) {
-    Stack_node *tmp;
+static int stack_delete_last_node(t_stack *stack) {
+    t_stack_node *tmp;
 
     tmp = stack->first;
     while (tmp->next != stack->last) {
@@ -60,7 +60,7 @@ static ret_type stack_delete_last_node(Stack *stack) {
     return (OK);
 }
 
-void *stack_pop(Stack *stack) {
+void *stack_pop(t_stack *stack) {
     if (stack->first == stack->last && stack->first->buffer_pt == 0) {
         printf("Error: nothing to pop from stack\n");
         return (NULL);
@@ -72,7 +72,7 @@ void *stack_pop(Stack *stack) {
     return (stack->last->buffer[stack->last->buffer_pt]);
 }
 
-ret_type stack_push(Stack *stack, void *x) {
+int stack_push(t_stack *stack, void *x) {
     stack->last->buffer[stack->last->buffer_pt] = x;
     if (stack->last->buffer_pt == STACK_BUFF_SIZE-1) {
         stack_new_node(&(stack->last->next));
@@ -83,7 +83,7 @@ ret_type stack_push(Stack *stack, void *x) {
 	return (OK);
 }
 
-bool stack_is_empty(Stack *stack) {
+char stack_is_empty(t_stack *stack) {
     if (stack->first == stack->last && stack->first->buffer_pt == 0) {
         return (TRUE);
     }
@@ -91,8 +91,8 @@ bool stack_is_empty(Stack *stack) {
 }
 
 
-void *stack_get_last(Stack *stack) {
-    Stack_node *tmp;
+void *stack_get_last(t_stack *stack) {
+    t_stack_node *tmp;
 
     tmp = stack->last;
     if (stack_is_empty(stack)) {

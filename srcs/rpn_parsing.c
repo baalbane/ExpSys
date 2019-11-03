@@ -1,7 +1,7 @@
 
 #include "main.h"
 
-static ret_type pop_parent(rpn_data *data) {
+static int pop_parent(t_rpn_data *data) {
     char a;
 
     while ((a = (char)stack_pop(data->stack)) != '(') {
@@ -23,7 +23,7 @@ static int  get_ope_lvl(char a) {
 	return ((int)(ptr - OPERANDS));
 }
 
-static STACK_CMP rpn_cmp_op_lvl(rpn_data *data, char a) {
+static char rpn_cmp_op_lvl(t_rpn_data *data, char a) {
     int op_lvl    = get_ope_lvl(a);
     int stack_lvl = get_ope_lvl((char)stack_get_last(data->stack));
     if (op_lvl > stack_lvl) {
@@ -34,12 +34,12 @@ static STACK_CMP rpn_cmp_op_lvl(rpn_data *data, char a) {
     return (STACK_IS_EQUAL);
 }
 
-static ret_type rpn_init(rpn_data **to_init, char *line) {
-    rpn_data *new;
+static int rpn_init(t_rpn_data **to_init, char *line) {
+    t_rpn_data *new;
     int       len;
 
     len = strlen(line);
-    new = malloc(sizeof(rpn_data));
+    new = malloc(sizeof(t_rpn_data));
     new->rpn = malloc(sizeof(char) * (len + 1));
     new->rpn_pt = -1;
     stack_new(&(new->stack));
@@ -48,7 +48,7 @@ static ret_type rpn_init(rpn_data **to_init, char *line) {
     return (OK);
 }
 
-static ret_type rpn_cleanup(rpn_data *to_del) {
+static int rpn_cleanup(t_rpn_data *to_del) {
     stack_delete(to_del->stack);
     free(to_del);
     return (OK);
@@ -56,7 +56,7 @@ static ret_type rpn_cleanup(rpn_data *to_del) {
 
 
 char *rpn_get(char *line) {
-    rpn_data  *data;
+    t_rpn_data  *data;
     int        i;
 
     rpn_init(&data, line);

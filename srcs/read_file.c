@@ -5,7 +5,7 @@
 static FILE *file   = NULL;
 static char *buffer = NULL;
 
-ret_type cleanup_read() {
+int cleanup_read() {
     if (file) {
         fclose(file);
         file = NULL;
@@ -17,7 +17,7 @@ ret_type cleanup_read() {
     return (OK);
 }
 
-ret_type init_read(char *file_name) {
+int init_read(char *file_name) {
     cleanup_read();
     if ((file = fopen(file_name, "r")) == NULL) {
         printf("ERROR: file \"%s\" doesn't exist\n", file_name);
@@ -43,7 +43,7 @@ static int		count_non_whitespace(char *line) {
 	return (count);
 }
 
-static ret_type remove_space(char **line) {
+static int remove_space(char **line) {
     char *new_line;
     int   len;
     int   i;
@@ -63,7 +63,7 @@ static ret_type remove_space(char **line) {
     return (OK);
 }
 
-static ret_type return_line(char **line) {
+static int return_line(char **line) {
     char    *old_buffer;
     char    *ptr;
     
@@ -93,7 +93,7 @@ static ret_type return_line(char **line) {
     return (OK);
 }
 
-static ret_type read_buffer() {
+static int read_buffer() {
     char   *new_buffer;
     int     read_size;
     char    read_buffer[READ_BUFF_SIZE+1];
@@ -111,8 +111,8 @@ static ret_type read_buffer() {
     return (OK);
 }
 
-ret_type get_new_line(char **line) {
-    ret_type  ret;
+int get_new_line(char **line) {
+    int  ret;
 
     ret = OK;
     while (ret == OK) {

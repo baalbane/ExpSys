@@ -1,26 +1,38 @@
-#ifndef OPERAND_H_
-#define OPERAND_H_
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operand.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/02 17:52:39 by egaborea          #+#    #+#             */
+/*   Updated: 2019/11/03 16:42:42 by egaborea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-struct nodes;
+#ifndef OPERAND_H
+# define OPERAND_H
 
-enum OPERAND_TYPES {
-    OPERAND_TYPE_XOR = 0,
-    OPERAND_TYPE_OR,
-    OPERAND_TYPE_AND,
-    OPERAND_TYPE_NOT,
-    NB_OPERAND_TYPE
-};
+# define OPERAND_TYPE_XOR 0
+# define OPERAND_TYPE_OR 1
+# define OPERAND_TYPE_AND 2
+# define OPERAND_TYPE_NOT 3
+# define NB_OPERAND_TYPE 4
 
-typedef struct  t_operand
+struct s_node;
+
+typedef struct		s_operand
 {
-    char	   node_type;
-    char        operand_type;
-    nodes      *right;
-    nodes      *left;
-}               operand, **operand_list;
+	char			node_type;
+	char			operand_type;
+	struct s_node	*right;
+	struct s_node	*left;
+}					t_operand;
 
+typedef t_operand	**t_operand_list;
 
-operand *operand_new(t_graph*, Stack*, char);
-ret_type init_operand_list(t_graph*);
+t_operand			*operand_new(t_graph *graph, t_stack *stack,\
+					char operand_type);
+int					init_operand_list(t_graph *graph);
 
 #endif
