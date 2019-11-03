@@ -12,19 +12,23 @@
 
 #include "main.h"
 
+t_implication		*implication_new(t_graph *graph)
+{
+	t_implication	*new;
 
-t_implication *implication_new(t_graph *graph) {
-    t_implication *new;
-
-    new = malloc(sizeof(t_implication));
-    new->node_type = NODE_TYPE_IMPLICATION;
-    add_new_node(graph, (t_node*)new);
-    return (new);
+	new = malloc(sizeof(t_implication));
+	new->node_type = NODE_TYPE_IMPLICATION;
+	add_new_node(graph, (t_node*)new);
+	return (new);
 }
 
-int init_implication_list(t_graph *graph) {
-    graph->implication_list_size = LIST_DEFAULT_SIZE;
-    graph->implications = malloc(sizeof(t_implication*) * graph->implication_list_size);
-    graph->implications[0] = NULL;
-    return (OK);
+int					init_implication_list(t_graph *graph)
+{
+	size_t size;
+
+	size = graph->implication_list_size;
+	graph->implication_list_size = LIST_DEFAULT_SIZE;
+	graph->implications = malloc(sizeof(t_implication*) * size);
+	graph->implications[0] = NULL;
+	return (OK);
 }

@@ -38,7 +38,7 @@ t_fact		*get_fact(t_graph *graph, char name)
 	return (fact_new(graph, name));
 }
 
-int	init_fact_list(t_graph *graph)
+int			init_fact_list(t_graph *graph)
 {
 	graph->fact_list_size = LIST_DEFAULT_SIZE;
 	graph->facts = malloc(sizeof(t_fact*) * graph->fact_list_size);
