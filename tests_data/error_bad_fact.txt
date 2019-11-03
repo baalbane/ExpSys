@@ -1,0 +1,3 @@
+SALUT=>B
+=SALUT
+?B

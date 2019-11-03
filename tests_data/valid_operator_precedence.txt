@@ -1,0 +1,6 @@
+A|B+C=>D
+
+E^F|G=>H
+
+=AEFG
+?DH # Expected : D = True & H = False

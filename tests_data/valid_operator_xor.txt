@@ -1,0 +1,6 @@
+A^B=>X
+C^D=>Y
+E^F=>Z
+
+=ABC
+?XYZ # X = False & Y = True & Z = False

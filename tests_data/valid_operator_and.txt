@@ -1,0 +1,6 @@
+A+B=>X
+C+D=>Y
+E+F=>Z
+
+=ABC
+?XYZ # X = True & Y = False & Z = False
