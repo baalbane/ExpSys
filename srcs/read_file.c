@@ -12,16 +12,18 @@
 
 #include "main.h"
 
-static FILE *g_file   = NULL;
+static FILE *g_file = NULL;
 static char *g_buffer = NULL;
 
-int			cleanup_read()
+int			cleanup_read(void)
 {
-	if (g_file) {
+	if (g_file)
+	{
 		fclose(g_file);
 		g_file = NULL;
 	}
-	if (g_buffer) {
+	if (g_buffer)
+	{
 		free(g_buffer);
 		g_buffer = NULL;
 	}
@@ -31,7 +33,8 @@ int			cleanup_read()
 int			init_read(char *file_name)
 {
 	cleanup_read();
-	if ((g_file = fopen(file_name, "r")) == NULL) {
+	if ((g_file = fopen(file_name, "r")) == NULL)
+	{
 		printf("ERROR: file \"%s\" doesn't exist\n", file_name);
 		return (ERROR);
 	}
@@ -40,27 +43,29 @@ int			init_read(char *file_name)
 	return (OK);
 }
 
-static int	count_non_whitespace(char *line) {
-	int   	count;
-	int   	i;
+static int	count_non_whitespace(char *line)
+{
+	int		count;
+	int		i;
 
 	i = 0;
 	count = 0;
-	while (line[i] != '\0' && line[i] != '#') {
-		if (line[i] != ' ' && line[i] != '\t') {
+	while (line[i] != '\0' && line[i] != '#')
+	{
+		if (line[i] != ' ' && line[i] != '\t')
 			count++;
-		}
 		i++;
 	}
 	return (count);
 }
 
-static int	remove_space(char **line) {
+static int	remove_space(char **line)
+{
 	char	*new_line;
 	int		len;
 	int		i;
 
-	new_line = malloc(sizeof(char) * (count_non_whitespace(*line)+1));
+	new_line = malloc(sizeof(char) * (count_non_whitespace(*line) + 1));
 	i = 0;
 	len = 0;
 	while ((*line)[i] != '\0' && (*line)[i] != '#')
@@ -77,9 +82,9 @@ static int	remove_space(char **line) {
 
 static int	return_line(char **line)
 {
-	char    *old_buffer;
-	char    *ptr;
-	
+	char	*old_buffer;
+	char	*ptr;
+
 	ptr = strchr(g_buffer, '\n');
 	if (!ptr)
 		ptr = g_buffer + strlen(g_buffer);
@@ -91,8 +96,8 @@ static int	return_line(char **line)
 	}
 	else
 	{
-		g_buffer = malloc(sizeof(char) * (strlen(ptr+1) + 1));
-		strcpy(g_buffer, ptr+1);
+		g_buffer = malloc(sizeof(char) * (strlen(ptr + 1) + 1));
+		strcpy(g_buffer, ptr + 1);
 	}
 	*ptr = '\0';
 	*line = malloc(sizeof(char) * (strlen(old_buffer) + 1));
@@ -102,11 +107,11 @@ static int	return_line(char **line)
 	return (OK);
 }
 
-static int	read_buffer()
+static int	read_buffer(void)
 {
 	char	*new_buffer;
 	int		read_size;
-	char	read_buffer[READ_BUFF_SIZE+1];
+	char	read_buffer[READ_BUFF_SIZE + 1];
 
 	read_size = fread(read_buffer, sizeof(char), READ_BUFF_SIZE, g_file);
 	if (read_size <= 0)
