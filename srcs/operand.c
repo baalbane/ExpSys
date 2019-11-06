@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operand.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:24:50 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/03 18:24:54 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/06 20:56:25 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_operand		*operand_new(t_graph *graph, t_stack *stack, char operand_type)
 		new->right = (t_node*)stack_pop(stack);
 		new->left = (t_node*)stack_pop(stack);
 	}
-	if (new->operand_type == OPERAND_TYPE_XOR)
+	if (new->operand_type == OPERAND_TYPE_NOT)
 	{
 		new->left = (t_node*)stack_pop(stack);
 	}

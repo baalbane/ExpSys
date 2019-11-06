@@ -60,8 +60,15 @@ static int stack_delete_last_node(t_stack *stack) {
     return (OK);
 }
 
-void *stack_pop(t_stack *stack) {
+char stack_is_empty(t_stack *stack) {
     if (stack->first == stack->last && stack->first->buffer_pt == 0) {
+        return (TRUE);
+    }
+    return (FALSE);
+}
+
+void *stack_pop(t_stack *stack) {
+    if (stack_is_empty(stack)) {
         printf("Error: nothing to pop from stack\n");
         return (NULL);
     } else if (stack->last->buffer_pt == 0) {
@@ -81,13 +88,6 @@ int stack_push(t_stack *stack, void *x) {
         stack->last->buffer_pt++;
     }
 	return (OK);
-}
-
-char stack_is_empty(t_stack *stack) {
-    if (stack->first == stack->last && stack->first->buffer_pt == 0) {
-        return (TRUE);
-    }
-	return (FALSE);
 }
 
 

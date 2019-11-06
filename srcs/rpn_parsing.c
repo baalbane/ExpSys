@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rpn_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:12:06 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/03 19:12:08 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/06 20:58:12 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		pop_parent(t_rpn_data *data)
 {
 	char		a;
 
-	while ((a = (char)stack_pop(data->stack)) != '(')
+	while ((a = *(char*)stack_pop(data->stack)) != '(')
 	{
 		if (a == 0)
 		{
@@ -44,7 +44,7 @@ static char		rpn_cmp_op_lvl(t_rpn_data *data, char a)
 	int			stack_lvl;
 
 	op_lvl = get_ope_lvl(a);
-	stack_lvl = get_ope_lvl((char)stack_get_last(data->stack));
+	stack_lvl = get_ope_lvl(*(char*)stack_get_last(data->stack));
 	if (op_lvl > stack_lvl)
 		return (STACK_IS_LOWER);
 	else if (op_lvl < stack_lvl)
@@ -85,30 +85,30 @@ char			*rpn_get(char *line)
 	{
 		if (line[i] >= 'A' && line[i] <= 'Z')
 			data->rpn[++(data->rpn_pt)] = line[i];
-		else if (line[i] == '(')
-			stack_push(data->stack, ((void**)line)[i]);
+		else if (line[i] == '(')			
+			stack_push(data->stack, ((void*)(line+i)));
 		else if (line[i] == ')')
 			pop_parent(data);
 		else if (strchr(OPERANDS, line[i]) != NULL)
 		{
 			if (stack_is_empty(data->stack) == TRUE)
-				stack_push(data->stack, ((void**)line)[i]);
+				stack_push(data->stack, ((void*)(line+i)));
 			else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_LOWER)
-				stack_push(data->stack, ((void**)line)[i]);
+				stack_push(data->stack, ((void*)(line+i)));
 			else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_EQUAL)
 			{
-				data->rpn[++(data->rpn_pt)] = (char)stack_pop(data->stack);
-				stack_push(data->stack, ((void**)line)[i]);
+				data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
+				stack_push(data->stack, ((void*)(line+i)));
 			}
 			else
 			{
-				data->rpn[++(data->rpn_pt)] = (char)stack_pop(data->stack);
+				data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
 				i--;
 			}
 		}
 	}
 	while (stack_is_empty(data->stack) == FALSE)
-		data->rpn[++(data->rpn_pt)] = (char)stack_pop(data->stack);
+		data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
 	data->rpn[++(data->rpn_pt)] = '\0';
 	ret = data->rpn;
 	rpn_cleanup(data);
