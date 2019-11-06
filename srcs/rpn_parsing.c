@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:12:06 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/06 20:58:12 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/06 21:06:50 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,25 @@ static int		rpn_cleanup(t_rpn_data *to_del)
 	return (OK);
 }
 
+int				rpn_handle_operands(t_rpn_data *data, char *operand)
+{
+	if (stack_is_empty(data->stack) == TRUE)
+		stack_push(data->stack, (void*)operand);
+	else if (rpn_cmp_op_lvl(data, *operand) == STACK_IS_LOWER)
+		stack_push(data->stack, (void*)operand);
+	else if (rpn_cmp_op_lvl(data, *operand) == STACK_IS_EQUAL)
+	{
+		data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
+		stack_push(data->stack, (void*)operand);
+	}
+	else
+	{
+		data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
+		return (-1);
+	}
+	return (0);
+}
+
 char			*rpn_get(char *line)
 {
 	t_rpn_data	*data;
@@ -85,26 +104,13 @@ char			*rpn_get(char *line)
 	{
 		if (line[i] >= 'A' && line[i] <= 'Z')
 			data->rpn[++(data->rpn_pt)] = line[i];
-		else if (line[i] == '(')			
-			stack_push(data->stack, ((void*)(line+i)));
+		else if (line[i] == '(')
+			stack_push(data->stack, ((void*)(line + i)));
 		else if (line[i] == ')')
 			pop_parent(data);
 		else if (strchr(OPERANDS, line[i]) != NULL)
 		{
-			if (stack_is_empty(data->stack) == TRUE)
-				stack_push(data->stack, ((void*)(line+i)));
-			else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_LOWER)
-				stack_push(data->stack, ((void*)(line+i)));
-			else if (rpn_cmp_op_lvl(data, line[i]) == STACK_IS_EQUAL)
-			{
-				data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
-				stack_push(data->stack, ((void*)(line+i)));
-			}
-			else
-			{
-				data->rpn[++(data->rpn_pt)] = *(char*)stack_pop(data->stack);
-				i--;
-			}
+			i += rpn_handle_operands(data, line + i);
 		}
 	}
 	while (stack_is_empty(data->stack) == FALSE)
