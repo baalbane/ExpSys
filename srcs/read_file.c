@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:34:40 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/03 18:34:41 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:31:58 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,6 @@ int			init_read(char *file_name)
 	}
 	g_buffer = malloc(sizeof(char));
 	g_buffer[0] = '\0';
-	return (OK);
-}
-
-static int	count_non_whitespace(char *line)
-{
-	int		count;
-	int		i;
-
-	i = 0;
-	count = 0;
-	while (line[i] != '\0' && line[i] != '#')
-	{
-		if (line[i] != ' ' && line[i] != '\t')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static int	remove_space(char **line)
-{
-	char	*new_line;
-	int		len;
-	int		i;
-
-	new_line = malloc(sizeof(char) * (count_non_whitespace(*line) + 1));
-	i = 0;
-	len = 0;
-	while ((*line)[i] != '\0' && (*line)[i] != '#')
-	{
-		if ((*line)[i] != ' ' && (*line)[i] != '\t')
-			new_line[len++] = (*line)[i];
-		i++;
-	}
-	new_line[len] = '\0';
-	free(*line);
-	*line = new_line;
 	return (OK);
 }
 

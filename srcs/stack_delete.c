@@ -6,14 +6,13 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 22:59:34 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/06 23:04:38 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:19:11 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-
-int			stack_delete_node(t_stack_node *to_del)
+int					stack_delete_node(t_stack_node *to_del)
 {
 	if (to_del->next)
 		stack_delete_node(to_del->next);
@@ -28,7 +27,7 @@ int					stack_delete(t_stack *to_del)
 	return (OK);
 }
 
-int			stack_delete_last_node(t_stack *stack)
+int					stack_delete_last_node(t_stack *stack)
 {
 	t_stack_node	*tmp;
 

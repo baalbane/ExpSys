@@ -7,7 +7,8 @@ SRC_NAME =	main.c           process_file.c         \
 			fact.c 			 operand.c		        \
 			implication.c	 compute_graph_state.c	\
 			rule_parsing.c   stack_new.c            \
-			stack_delete.c
+			stack_delete.c   evaluate_expression.c  \
+			rpn_tools.c      read_tool.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

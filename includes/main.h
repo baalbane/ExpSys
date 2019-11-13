@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:24:26 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/03 16:33:50 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:32:46 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,17 @@
 int	process_file(char *line, t_graph *graph);
 int	compute_graph_state(t_graph *graph);
 int	process_implication(char *line, t_graph *graph);
+
+int	evaluate_expression(int left, int right, char operand);
+int	evalute_node(t_node *node);
+int	evalute_implication(t_implication *implication);
+
+int	infer_node(t_node *node, int value);
+
+int	rpn_init(t_rpn_data **to_init, char *line);
+int	rpn_cleanup(t_rpn_data *to_del);
+
+int	remove_space(char **line);
+int	count_non_whitespace(char *line);
 
 #endif

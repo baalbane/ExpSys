@@ -6,13 +6,13 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:00:53 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/06 23:04:43 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:19:51 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int			stack_new_node(t_stack_node **node_ptr)
+int					stack_new_node(t_stack_node **node_ptr)
 {
 	t_stack_node	*new;
 

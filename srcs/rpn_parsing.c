@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:12:06 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/06 21:06:50 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:30:16 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,6 @@ static char		rpn_cmp_op_lvl(t_rpn_data *data, char a)
 	else if (op_lvl < stack_lvl)
 		return (STACK_IS_HIGHTER);
 	return (STACK_IS_EQUAL);
-}
-
-static int		rpn_init(t_rpn_data **to_init, char *line)
-{
-	t_rpn_data	*new;
-	int			len;
-
-	len = strlen(line);
-	new = malloc(sizeof(t_rpn_data));
-	new->rpn = malloc(sizeof(char) * (len + 1));
-	new->rpn_pt = -1;
-	stack_new(&(new->stack));
-	*to_init = new;
-	return (OK);
-}
-
-static int		rpn_cleanup(t_rpn_data *to_del)
-{
-	stack_delete(to_del->stack);
-	free(to_del);
-	return (OK);
 }
 
 int				rpn_handle_operands(t_rpn_data *data, char *operand)

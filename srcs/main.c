@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 15:26:14 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/03 16:03:39 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:10:05 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int			main(int argc, char **argv)
 	}
 	graph = new_graph();
 	process_file(argv[1], graph);
-	//delete_graph(graph);
 	return (0);
 }

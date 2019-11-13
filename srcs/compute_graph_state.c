@@ -6,40 +6,11 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:02:19 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/06 20:02:00 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 19:28:38 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-int				evaluate_expression(int left, int right, char operand)
-{
-	if (operand == OPERAND_TYPE_AND)
-		return (right && left);
-	if (operand == OPERAND_TYPE_OR)
-		return (right || left);
-	if (operand == OPERAND_TYPE_XOR)
-		return (right ^ left);
-	if (operand == OPERAND_TYPE_NOT)
-		return (!left);
-	return (-1);
-}
-
-static int		evalute_node(t_node *node)
-{
-	t_operand	*operand_node;
-	int			right;
-	int			left;
-
-	if (!node)
-		return (0);
-	if (node->node_type == NODE_TYPE_FACT)
-		return (((t_fact *)node)->set_value);
-	operand_node = (t_operand *)node;
-	right = evalute_node(operand_node->right);
-	left = evalute_node(operand_node->left);
-	return (evaluate_expression(left, right, operand_node->operand_type));
-}
 
 static int		set_fact_value(t_fact *fact, int value)
 {
@@ -54,7 +25,7 @@ static int		set_fact_value(t_fact *fact, int value)
 	return (1);
 }
 
-static int		infer_node(t_node *node, int value)
+int				infer_node(t_node *node, int value)
 {
 	t_operand	*operand_node;
 	int			left_result;
@@ -73,13 +44,6 @@ static int		infer_node(t_node *node, int value)
 	}
 	if (operand_node->operand_type == OPERAND_TYPE_NOT)
 		return (infer_node(operand_node->left, !value));
-	return (0);
-}
-
-static int		evalute_implication(t_implication *implication)
-{
-	if (evalute_node(implication->left))
-		return (infer_node(implication->right, 1));
 	return (0);
 }
 
