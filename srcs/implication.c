@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   implication.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 15:54:42 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/03 16:26:53 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/13 21:54:18 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_implication		*implication_new(t_graph *graph)
 
 	new = malloc(sizeof(t_implication));
 	new->node_type = NODE_TYPE_IMPLICATION;
+	new->last_left_value = 0;
 	add_new_node(graph, (t_node*)new);
 	return (new);
 }

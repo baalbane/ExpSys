@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:26:24 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/13 19:25:06 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/13 22:08:35 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int			has_valid_implication(char *line, char *double_implication)
 	if (!ptr || ptr == line || *(ptr + 1) != '>')
 		return (CRITICAL_ERROR);
 	*double_implication = FALSE;
-	if (*(ptr - 1) == '<')
+	if (ptr != line && *(ptr - 1) == '<')
 		*double_implication = TRUE;
 	return (OK);
 }
@@ -58,12 +58,6 @@ static t_node		*create_expr_from_rpn(t_graph *graph, char *rpn_string)
 	return (tmp);
 }
 
-int					ft_error(void)
-{
-	printf("SYNTAXE ERROR\n");
-	exit(0);
-}
-
 int					process_implication(char *line, t_graph *graph)
 {
 	char			*right;
@@ -73,7 +67,9 @@ int					process_implication(char *line, t_graph *graph)
 
 	if (has_valid_implication(line, &has_double_implication) == CRITICAL_ERROR
 	|| split_rule(line, &left, &right) == CRITICAL_ERROR)
-		return (ft_error());
+		return (ft_error("Syntax error"));
+	check_line(left, 1);
+	check_line(right, 0);
 	left = rpn_get(left);
 	right = rpn_get(right);
 	new_implication = implication_new(graph);
