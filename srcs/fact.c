@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:46:25 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 21:10:46 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:18:02 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ t_fact		*get_fact(t_graph *graph, char name)
 	int		i;
 
 	i = -1;
+	if (name < 'A' || name > 'Z')
+		ft_error("Wrong operand name");
+
 	while (graph->facts[++i])
 	{
 		if (((t_fact*)(graph->facts[i]))->name == name)
