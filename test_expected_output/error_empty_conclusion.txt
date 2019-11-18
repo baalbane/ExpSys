@@ -1,1 +1,1 @@
-Error : Error: wrong last character
+Error : wrong last character

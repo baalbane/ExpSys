@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fact.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:46:25 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/03 16:27:16 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/18 21:10:46 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_fact		*fact_new(t_graph *graph, char name)
 {
 	t_fact	*new;
 
-	new = malloc(sizeof(t_fact));
+	new = ft_malloc(sizeof(t_fact));
 	new->node_type = NODE_TYPE_FACT;
 	new->name = name;
 	new->initial_value = 0;
@@ -41,7 +41,7 @@ t_fact		*get_fact(t_graph *graph, char name)
 int			init_fact_list(t_graph *graph)
 {
 	graph->fact_list_size = LIST_DEFAULT_SIZE;
-	graph->facts = malloc(sizeof(t_fact*) * graph->fact_list_size);
+	graph->facts = ft_malloc(sizeof(t_fact*) * graph->fact_list_size);
 	graph->facts[0] = NULL;
 	return (OK);
 }

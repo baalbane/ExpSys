@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:00:53 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/13 19:19:51 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 21:10:40 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int					stack_new_node(t_stack_node **node_ptr)
 {
 	t_stack_node	*new;
 
-	if ((new = malloc(sizeof(t_stack_node))) == NULL)
+	if ((new = ft_malloc(sizeof(t_stack_node))) == NULL)
 	{
-		printf("MALLOC ERROR\n");
+		printf("ft_malloc ERROR\n");
 		return (CRITICAL_ERROR);
 	}
 	new->buffer_pt = 0;
@@ -31,9 +31,9 @@ int					stack_new(t_stack **stack_ptr)
 {
 	t_stack			*new;
 
-	if ((new = malloc(sizeof(t_stack))) == NULL)
+	if ((new = ft_malloc(sizeof(t_stack))) == NULL)
 	{
-		printf("MALLOC ERROR\n");
+		printf("ft_malloc ERROR\n");
 		return (CRITICAL_ERROR);
 	}
 	if (stack_new_node(&(new->first)) != OK)

@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:24:50 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/06 20:56:25 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 21:10:50 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_operand		*operand_new(t_graph *graph, t_stack *stack, char operand_type)
 {
 	t_operand	*new;
 
-	new = malloc(sizeof(t_operand));
+	new = ft_malloc(sizeof(t_operand));
 	new->node_type = NODE_TYPE_OPERAND;
 	new->right = NULL;
 	new->operand_type = (strchr(OPERANDS, operand_type) - OPERANDS);
@@ -39,7 +39,7 @@ t_operand		*operand_new(t_graph *graph, t_stack *stack, char operand_type)
 int				init_operand_list(t_graph *graph)
 {
 	graph->operand_list_size = LIST_DEFAULT_SIZE;
-	graph->operands = malloc(sizeof(t_operand*) * graph->operand_list_size);
+	graph->operands = ft_malloc(sizeof(t_operand*) * graph->operand_list_size);
 	graph->operands[0] = NULL;
 	return (OK);
 }

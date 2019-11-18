@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:34:40 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/13 19:31:58 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:05:36 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			init_read(char *file_name)
 		printf("ERROR: file \"%s\" doesn't exist\n", file_name);
 		return (ERROR);
 	}
-	g_buffer = malloc(sizeof(char));
+	g_buffer = ft_malloc(sizeof(char));
 	g_buffer[0] = '\0';
 	return (OK);
 }
@@ -54,16 +54,16 @@ static int	return_line(char **line)
 	old_buffer = g_buffer;
 	if (*ptr == '\0')
 	{
-		g_buffer = malloc(sizeof(char));
+		g_buffer = ft_malloc(sizeof(char));
 		g_buffer[0] = '\0';
 	}
 	else
 	{
-		g_buffer = malloc(sizeof(char) * (strlen(ptr + 1) + 1));
+		g_buffer = ft_malloc(sizeof(char) * (strlen(ptr + 1) + 1));
 		strcpy(g_buffer, ptr + 1);
 	}
 	*ptr = '\0';
-	*line = malloc(sizeof(char) * (strlen(old_buffer) + 1));
+	*line = ft_malloc(sizeof(char) * (strlen(old_buffer) + 1));
 	strcpy(*line, old_buffer);
 	free(old_buffer);
 	remove_space(line);
@@ -80,7 +80,7 @@ static int	read_buffer(void)
 	if (read_size <= 0)
 		return (READ_EOF);
 	read_buffer[read_size] = '\0';
-	new_buffer = malloc(sizeof(char) * (strlen(g_buffer) + read_size + 1));
+	new_buffer = ft_malloc(sizeof(char) * (strlen(g_buffer) + read_size + 1));
 	strcpy(new_buffer, g_buffer);
 	strcat(new_buffer, read_buffer);
 	free(g_buffer);

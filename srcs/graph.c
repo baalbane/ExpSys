@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graph.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 17:06:15 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/03 16:27:17 by egaborea         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:05:47 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_graph			*new_graph(void)
 {
 	t_graph		*new;
 
-	new = malloc(sizeof(t_graph));
+	new = ft_malloc(sizeof(t_graph));
 	init_operand_list(new);
 	init_fact_list(new);
 	init_implication_list(new);
