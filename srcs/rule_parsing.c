@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:26:24 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/13 22:08:35 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:51:14 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ int					process_implication(char *line, t_graph *graph)
 	if (has_valid_implication(line, &has_double_implication) == CRITICAL_ERROR
 	|| split_rule(line, &left, &right) == CRITICAL_ERROR)
 		return (ft_error("Syntax error"));
-	check_line(left, 1);
+	if (has_double_implication)
+		check_line(left, 0);
+	else
+		check_line(left, 1);
 	check_line(right, 0);
 	left = rpn_get(left);
 	right = rpn_get(right);

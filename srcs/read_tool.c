@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 19:42:58 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 20:44:18 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:57:26 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ int			check_char(char current, char last, int left)
 	}
 	else if (current == '!')
 	{
-		if (last != 0 && strchr("+|^)", last) == NULL)
-			ft_error("Error: wrong negation");
+		if (last != 0 && strchr("+|^(", last) == NULL)
+			ft_error("wrong negation");
 	}
 	else if (strchr("+|^", current))
 	{
 		if (last != ')' && ((!left && (current == '|' || current == '^')) || last < 'A' || last > 'Z'))
-			ft_error("Error: wrong rule");
+			ft_error("wrong rule");
 	}
 	else if (current == '(')
 	{
 		if (!left || !strchr("+|^!(", last))
-			ft_error("Error: missing operator");
+			ft_error("missing operator");
 	}
 	else if (current == ')')
 	{
-		if (!left || (last != ')' && last < 'A' && last > 'Z'))
-			ft_error("Error: missing operand");
+		if (!left || (last != ')' && (last < 'A' || last > 'Z')))
+			ft_error("missing operand");
 	}
 	else
 		ft_error("Unknow character");
@@ -79,7 +79,7 @@ int			check_line(char *line, int left)
 		last = line[i];
 	}
 	if ((last < 'A' || last > 'Z') && last != ')')
-		ft_error("Error: wrong last character");
+		ft_error("wrong last character");
 	return (1);
 }
 
