@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:24:26 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/18 22:54:34 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 23:12:19 by egaborea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ int		check_line(char *line, int left);
 
 int		ft_error(char *error);
 void	*ft_malloc(size_t size);
+
+int		check_parenthesis_coherence(char *line);
+int		check_parenthesis(char current, char last, int left);
+int		check_char(char current, char last, int left);
 
 #endif

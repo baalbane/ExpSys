@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluate_expression.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 19:27:17 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 22:55:32 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 23:18:25 by egaborea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int				evalute_implication(t_implication *implication)
 		return (infer_node(implication->right, 1));
 	}
 	else if (implication->last_left_value)
-		ft_error("Error : Conflicting rules\n");
+		ft_error("Conflicting rules");
 	return (0);
 }
