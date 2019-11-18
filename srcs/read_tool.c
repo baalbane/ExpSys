@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 19:42:58 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 20:40:33 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:44:18 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			check_char(char current, char last, int left)
 	}
 	else if (current == '!')
 	{
-		if (last != 0 && strchr("+|^)", last))
+		if (last != 0 && strchr("+|^)", last) == NULL)
 			ft_error("Error: wrong negation");
 	}
 	else if (strchr("+|^", current))
