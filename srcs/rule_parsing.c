@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rule_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egaborea <egaborea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 19:26:24 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 20:51:14 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 23:02:27 by egaborea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,21 @@ static t_node		*create_expr_from_rpn(t_graph *graph, char *rpn_string)
 	return (tmp);
 }
 
+int					create_implication(t_graph *graph, char *left, char *right)
+{
+	t_implication	*new_implication;
+
+	new_implication = implication_new(graph);
+	new_implication->left = create_expr_from_rpn(graph, left);
+	new_implication->right = create_expr_from_rpn(graph, right);
+	return (0);
+}
+
 int					process_implication(char *line, t_graph *graph)
 {
 	char			*right;
 	char			*left;
 	char			has_double_implication;
-	t_implication	*new_implication;
 
 	if (has_valid_implication(line, &has_double_implication) == CRITICAL_ERROR
 	|| split_rule(line, &left, &right) == CRITICAL_ERROR)
@@ -75,15 +84,9 @@ int					process_implication(char *line, t_graph *graph)
 	check_line(right, 0);
 	left = rpn_get(left);
 	right = rpn_get(right);
-	new_implication = implication_new(graph);
-	new_implication->left = create_expr_from_rpn(graph, left);
-	new_implication->right = create_expr_from_rpn(graph, right);
+	create_implication(graph, left, right);
 	if (has_double_implication == TRUE)
-	{
-		new_implication = implication_new(graph);
-		new_implication->left = create_expr_from_rpn(graph, right);
-		new_implication->right = create_expr_from_rpn(graph, left);
-	}
+		create_implication(graph, right, left);
 	free(left);
 	free(right);
 	return (OK);
