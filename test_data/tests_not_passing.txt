@@ -1,6 +1,0 @@
-valid_and_in_conclusion.txt
-valid_nested_parenthesis.txt
-valid_operator_and.txt
-valid_operator_or.txt
-valid_operator_precedence.txt
-valid_operator_xor.txt
