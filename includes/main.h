@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:24:26 by egaborea          #+#    #+#             */
-/*   Updated: 2019/11/18 21:10:01 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:54:34 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		rpn_cleanup(t_rpn_data *to_del);
 int		remove_space(char **line);
 int		count_non_whitespace(char *line);
 
-int 	check_line(char *line, int left);
+int		check_line(char *line, int left);
 
 int		ft_error(char *error);
 void	*ft_malloc(size_t size);

@@ -6,7 +6,7 @@
 /*   By: baalbane <baalbane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 19:42:58 by baalbane          #+#    #+#             */
-/*   Updated: 2019/11/18 21:10:36 by baalbane         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:56:27 by baalbane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int			check_parenthesis(char *line)
 	{
 		if (*line == '(')
 			count++;
-		else if (*line == ')') {
+		else if (*line == ')')
 			count--;
-		}
 		if (count < 0 || (*line == '=' && count != 0))
 			ft_error("Parenthesis error");
 		line++;
