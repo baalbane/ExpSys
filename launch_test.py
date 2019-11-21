@@ -8,10 +8,10 @@ with os.scandir('test_expected_output/') as entries:
 		with open('test_expected_output/' + entry.name, 'r') as f:
 			expected = f.read()
 		if output != expected:
-			print('Error for file ' + entry.name)
+			print("Error for file " + entry.name)
 			print('--- Expected ---')
 			print(expected)
 			print('--- Got ---')
 			print(output)
 		else:
-			print(entry.name + ' : OK')
+                    print('OK : ' + entry.name)
